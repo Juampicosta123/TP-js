@@ -2,7 +2,7 @@ import './style.css'
 
 document.querySelector('#app').innerHTML = `
   <div>
-   <h1>Ejercicio 7: Introducción al DOM</h1>
+   <h1>Punto 7: Introducción al DOM</h1>
    <section id='section-change-color'>
       <h2>Ejercicio 1</h1>
       <p>¡Hola! Soy el primer texto en un párrafo</p>
@@ -17,8 +17,37 @@ document.querySelector('#app').innerHTML = `
       <input type='text' id='text' name='text'>
       <button>Enviar</button>
   </section>
+    <h1>Punto 8: Eventos en DOM</h1>
+    <section>
+      <h2>Ejercicio 1: Lista con elementos</h2>
+      <ul id='lista'>
+      <li>Elemento 1</li>
+      <li>Elemento 2</li>
+      <li>Elemento 3</li>
+      <li>Elemento 4</li>
+      </ul>
+  </section>
+     <section id='section8'>
+      <h2>Ejercicio 2: Campo de texto y botones</h2>
+      <input type='text' placeholder='Ingresa algo' />
+      <button>Deshabilitar campo</button>
+      <button>Habilitar campo</button>
+  </section>
+  <h1>Punto 9: Local Storage</h1>
+  <form>
+    <h2>Ejercicio 1</h2>
+    <div>
+      <label for='email'>Correo Electrónico:</label>
+      <input type='email' id='email' name='text'>
+      <button id='save-email'>Guardar Correo</button>
+    </div
+    <p>Correo guardado: <span id='email-saved'></span></p>
+    <br />
+    <button id='delete-email'>Eliminar Correo Guardado</button>
+  </form>
   </div>
 `
+
 //**PUNTO 1**
 //Ejercicio 2
 const a = 5
@@ -34,16 +63,11 @@ console.log(`Hola, ${nombre}!`)
 
 //**PUNTO 2**
 //Ejercicio 1
-//Con  2 numeros usando operador logico
-const a2 = 5
-const b2 = 10
-const mayor = a2 > b2 ? a2 : b2
 
-/*Con  3 numeros usando Math.max
 const a2 = 5
 const b2 = 10
 const c2 = 2
-const mayor = Math.max(a2, b2, c2) */
+const mayor = Math.max(a2, b2, c2)
 
 console.log(`El número mayor es: ${mayor}`)
 
@@ -164,4 +188,47 @@ form.addEventListener('submit', function (event) {
   const texto = document.getElementById('text').value
 
   alert(`El texto ingresado es: ${texto}`)
+})
+
+//**PUNTO 8** Eventos en DOM
+//Ejercicio 1
+const lista = document.getElementById('lista')
+const elements = lista.querySelectorAll('li')
+elements.forEach((element, index) => {
+  element.addEventListener('click', () => {
+    console.log(`Elemento ${index + 1} clickeado`)
+  })
+})
+
+//Ejercicio 2
+const sectionContainer = document.getElementById('section8')
+const input = sectionContainer.querySelector('input')
+const buttons = sectionContainer.querySelectorAll('button')
+const disableButton = buttons[0]
+const enableButton = buttons[1]
+
+disableButton.addEventListener('click', () => {
+  input.disabled = true
+})
+
+enableButton.addEventListener('click', () => {
+  input.disabled = false
+})
+
+//**PUNTO 9** Local Storage
+//Ejercicio 1
+const inputEmail = document.getElementById('email')
+const buttonSaveEmail = document.getElementById('save-email')
+const buttonDeleteEmail = document.getElementById('delete-email')
+const spanEmail = document.getElementById('email-saved')
+
+buttonSaveEmail.addEventListener('click', () => {
+  const email = inputEmail.value
+  localStorage.setItem('email', email)
+  spanEmail.innerText = localStorage.getItem('email')
+})
+
+buttonDeleteEmail.addEventListener('click', () => {
+  localStorage.removeItem('email')
+  spanEmail.innerText = ''
 })
